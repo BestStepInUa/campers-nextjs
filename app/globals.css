@@ -1,16 +1,19 @@
 @import 'tailwindcss';
 
 :root {
-  /* COLORS */
   --main: #101828;
   --text: #475467;
   --white: #fff;
+  --inputs: #f7f7f7;
   --badges: #f2f4f7;
   --gray: #6c717b;
   --gray-light: #dadde1;
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
+  --grey-green: #829b91;
+  --olive: #f0f1f1;
+  --green-hover: #6d7b75;
 
   /* FONTS */
   --font-family: 'Inter', sans-serif;
@@ -18,6 +21,16 @@
 
   /* TRANSITION */
   --main-transition: 333ms ease-in-out;
+}
+
+@theme {
+  --color-main: var(--main);
+  --color-inputs: var(--inputs);
+  --color-badges: var(--badges);
+  --color-grey-green: var(--grey-green);
+  --color-green-hover: var(--green-hover);
+
+  --breakpoint-xs: 23.5rem;
 }
 
 html {
