@@ -65,6 +65,8 @@
   --color-inputs: var(--inputs);
   --color-grey-green: var(--grey-green);
   --color-green-hover: var(--green-hover);
+
+  --breakpoint-xs: 23.5rem;
 }
 
 html {
