@@ -3,11 +3,12 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="flex min-h-[calc(100vh-4rem)] w-full overflow-hidden">
+    <section className="relative flex h-[calc(100vh-4rem)] w-full overflow-hidden">
       <Image
         src="/camper-hero.png"
         width={1440}
         height={689}
+        loading="eager"
         alt="Yellow vintage campervan parked beside a lake at sunset"
         className="absolute inset-0 h-full w-full object-cover"
       />
