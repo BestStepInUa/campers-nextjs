@@ -65,7 +65,7 @@ export interface FiltersResponseDto {
 export const fetchServerFilters = (): Promise<FiltersResponseDto> => {
   return nextServer<FiltersResponseDto>('/campers/filters', {
     next: {
-      revalidate: 60 * 60 * 24, // 24 години
+      revalidate: 60 * 60 * 24, // 1 day
     },
   });
 };
