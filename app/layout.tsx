@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Inter, Manrope, Geist } from 'next/font/google';
 import './globals.css';
 import TanStackProvider from '@/components/TanStackProvider';
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const inter = Inter({
   variable: '--font-inter',
@@ -38,7 +38,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, manrope.variable, "font-sans", geist.variable)}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={cn(
+        inter.variable,
+        manrope.variable,
+        'font-sans',
+        geist.variable
+      )}
+    >
       <body>
         <TanStackProvider>{children}</TanStackProvider>
       </body>
