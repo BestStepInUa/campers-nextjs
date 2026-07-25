@@ -39,8 +39,8 @@ export default function Header() {
                 className={cn(
                   'text-center text-sm md:text-base font-medium',
                   isActive
-                    ? 'text-grey-green hover:text-main [transition:color_var(--main-transition)]'
-                    : 'text-main hover:text-grey-green [transition:color_var(--main-transition)]'
+                    ? 'text-grey-green hover:text-main transition:color'
+                    : 'text-main hover:text-grey-green transition:color'
                 )}
               >
                 {link.label}

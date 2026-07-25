@@ -25,7 +25,7 @@ export default function Hero() {
         </div>
         <Link
           href="/catalog"
-          className="bg-grey-green hover:bg-green-hover duration-main ease-main lx:py-4 rounded-full px-4 py-2 text-sm font-medium tracking-[-0.01em] text-white [transition:background-color_var(--main-transition)] md:px-10 md:py-3 md:text-base xl:px-15"
+          className="bg-grey-green hover:bg-green-hover duration-main ease-main lx:py-4 transition:background-color rounded-full px-4 py-2 text-sm font-medium tracking-[-0.01em] text-white md:px-10 md:py-3 md:text-base xl:px-15"
         >
           View Now
         </Link>

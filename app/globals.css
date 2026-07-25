@@ -18,19 +18,24 @@
   /* FONTS */
   --font-family: 'Inter', sans-serif;
   --second-family: 'Manrope', sans-serif;
-
-  /* TRANSITION */
-  --main-transition: 333ms ease-in-out;
 }
 
 @theme {
   --color-main: var(--main);
+  --color-white: var(--white);
   --color-inputs: var(--inputs);
   --color-badges: var(--badges);
   --color-grey-green: var(--grey-green);
   --color-green-hover: var(--green-hover);
 
   --breakpoint-xs: 23.5rem;
+}
+
+@layer base {
+  * {
+    transition-duration: 333ms;
+    transition-timing-function: ease-in-out;
+  }
 }
 
 html {
