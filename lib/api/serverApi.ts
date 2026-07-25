@@ -1,5 +1,9 @@
 import { nextServer } from './api';
 
+type formType = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
+type transmissionType = 'automatic' | 'manual';
+type engineType = 'diesel' | 'petrol' | 'hybrid' | 'electric';
+
 interface CamperListItemDto {
   id: string;
   name: string;
@@ -7,14 +11,14 @@ interface CamperListItemDto {
   rating: number;
   location: string;
   description: string;
-  form: 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
+  form: formType;
   length: string;
   width: string;
   height: string;
   tank: string;
   consumption: string;
-  transmission: 'automatic' | 'manual';
-  engine: 'diesel' | 'petrol' | 'hybrid' | 'electric';
+  transmission: transmissionType;
+  engine: engineType;
   amenities: string[];
   coverImage: string;
   totalReviews: number;
@@ -28,7 +32,7 @@ export interface CamperListResponseDto {
   campers: CamperListItemDto[];
 }
 
-export interface CamperQueryParams {
+interface CamperQueryParams {
   location?: string;
   form?: string;
   transmission?: string;
@@ -50,4 +54,14 @@ export const fetchServerCampers = (
       engine: params.engine,
     },
   });
+};
+
+export interface FiltersResponseDto {
+  forms: formType[];
+  transmissions: transmissionType[];
+  engines: engineType[];
+}
+
+export const fetchServerFilters = (): Promise<FiltersResponseDto> => {
+  return nextServer<FiltersResponseDto>('/campers/filters');
 };
