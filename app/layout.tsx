@@ -22,12 +22,12 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'TravelTrucks',
-  description: 'Your personal campervan hire partner.',
+  description: 'Your personal camper hire partner',
   openGraph: {
     type: 'website',
     url: process.env['NEXT_OG_APP_URL'] || 'http://localhost:3000',
-    title: 'TravelTrucks campervan hire company',
-    description: 'Your personal campervan hire partner',
+    title: 'TravelTrucks camper hire company',
+    description: 'Your personal camper hire partner',
     siteName: 'TravelTrucks',
   },
 };
@@ -49,7 +49,9 @@ export default function RootLayout({
       )}
     >
       <body>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          <main>{children}</main>
+        </TanStackProvider>
       </body>
     </html>
   );

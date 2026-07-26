@@ -1,13 +1,13 @@
 import { createApi } from './createApi';
 
-const BACKEND_URL = `${process.env['NEXT_PUBLIC_API_URL']}/api`;
+const BACKEND_URL = `${process.env['NEXT_BACKEND_API_URL']}/api`;
 export const api = createApi(BACKEND_URL);
 
 type formType = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
 type transmissionType = 'automatic' | 'manual';
 type engineType = 'diesel' | 'petrol' | 'hybrid' | 'electric';
 
-interface CamperListItemDto {
+export interface CamperListItemDto {
   id: string;
   name: string;
   price: number;
