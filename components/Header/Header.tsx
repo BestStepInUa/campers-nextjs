@@ -14,7 +14,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="border-border bg-inputs border-badges w-full border-b px-7">
+    <header className="border-badges bg-inputs fixed inset-x-0 top-0 z-50 w-full border-b px-7">
       <div className="xs:gap-30 mx-auto flex h-10 w-full max-w-360 items-center justify-start gap-16 sm:h-12 sm:gap-50 md:h-14 md:gap-60 lg:h-16 lg:gap-70 xl:h-18 xl:gap-112.5">
         <Link href="/">
           <Image
@@ -39,8 +39,8 @@ export default function Header() {
                 className={cn(
                   'text-center text-sm font-medium md:text-base',
                   isActive
-                    ? 'text-grey-green hover:text-main transition:color'
-                    : 'text-main hover:text-grey-green transition:color'
+                    ? 'text-grey-green hover:text-main transition-color'
+                    : 'text-main hover:text-grey-green transition-color'
                 )}
               >
                 {link.label}
