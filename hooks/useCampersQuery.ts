@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { fetchCampers, type CamperListResponseDto } from '@/lib/api/api';
-
+import { fetchCampers } from '@/lib/api/api';
+import { toCatalogData } from '@/lib/adapters/campers';
 import { QUERY_KEYS } from '@/lib/react-query/queryKeys';
+
 import type { FilterValues } from '@/types/catalog';
 
 interface UseCampersQueryOptions {
@@ -29,31 +29,25 @@ export function useCampersQuery({
         perPage,
       }),
 
-    getNextPageParam: (lastPage: CamperListResponseDto) => {
-      return lastPage.page < lastPage.totalPages
-        ? lastPage.page + 1
-        : undefined;
-    },
+    getNextPageParam: (lastPage) =>
+      lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
+
+    select: toCatalogData,
   });
 
-  const campers = useMemo(
-    () => query.data?.pages.flatMap((page) => page.campers) ?? [],
-    [query.data]
-  );
-
-  const total = query.data?.pages.at(-1)?.total ?? 0;
-
-  const totalPages = query.data?.pages.at(-1)?.totalPages ?? 0;
-
   return {
-    ...query,
-
-    campers,
-
-    total,
-
-    totalPages,
+    campers: query.data?.campers ?? [],
+    total: query.data?.total ?? 0,
+    totalPages: query.data?.totalPages ?? 0,
 
     hasMore: query.hasNextPage ?? false,
+
+    fetchNextPage: query.fetchNextPage,
+
+    isLoading: query.isLoading,
+    isFetching: query.isFetching,
+    isFetchingNextPage: query.isFetchingNextPage,
+
+    error: query.error,
   };
 }

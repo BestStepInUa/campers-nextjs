@@ -45,11 +45,11 @@ export default function CatalogView() {
     return <p>Failed to load filters.</p>;
   }
 
+  console.count('CatalogView render');
   console.log({
     isLoading,
     isFetching,
     isFetchingNextPage,
-    campers: campers.length,
   });
 
   return (

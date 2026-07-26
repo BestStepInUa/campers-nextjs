@@ -13,7 +13,7 @@ export function useFiltersQuery() {
     staleTime: Infinity,
     gcTime: Infinity,
 
-    retry: 1,
+    retry: false,
 
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

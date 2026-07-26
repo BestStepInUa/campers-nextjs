@@ -2,20 +2,18 @@
 
 import { useCallback, useState } from 'react';
 
-import type { FilterValues } from '@/types/catalog';
+import { initialFilters, type FilterValues } from '@/types/catalog';
 
-const initialFilters: FilterValues = {
-  location: '',
-  form: '',
-  transmission: '',
-  engine: '',
-};
+function areFiltersEqual(a: FilterValues, b: FilterValues) {
+  return Object.keys(a).every(
+    (key) => a[key as keyof FilterValues] === b[key as keyof FilterValues]
+  );
+}
 
 export function useCatalogFilters() {
-  const [filters, setFilters] = useState<FilterValues>(initialFilters);
+  const [filters, setFilters] = useState(initialFilters);
 
-  const [appliedFilters, setAppliedFilters] =
-    useState<FilterValues>(initialFilters);
+  const [appliedFilters, setAppliedFilters] = useState(initialFilters);
 
   const changeFilter = useCallback(
     (field: keyof FilterValues, value: string) => {
@@ -28,18 +26,9 @@ export function useCatalogFilters() {
   );
 
   const search = useCallback(() => {
-    setAppliedFilters((prev) => {
-      if (
-        prev.location === filters.location &&
-        prev.form === filters.form &&
-        prev.engine === filters.engine &&
-        prev.transmission === filters.transmission
-      ) {
-        return prev;
-      }
-
-      return filters;
-    });
+    setAppliedFilters((prev) =>
+      areFiltersEqual(prev, filters) ? prev : filters
+    );
   }, [filters]);
 
   const clear = useCallback(() => {
