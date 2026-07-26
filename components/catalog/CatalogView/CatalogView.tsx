@@ -43,13 +43,6 @@ export default function CatalogView() {
     return <p>Failed to load filters.</p>;
   }
 
-  console.count('CatalogView render');
-  console.log({
-    isLoading,
-    isFetching,
-    isFetchingNextPage,
-  });
-
   return (
     <section className="pt-12 pb-13">
       <div className="mx-auto flex max-w-360 justify-between gap-16.25 px-16">
