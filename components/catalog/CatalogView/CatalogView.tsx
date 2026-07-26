@@ -11,6 +11,7 @@ import { useFiltersQuery } from '@/hooks/useFiltersQuery';
 import NoCampers from '../NoCampers';
 import Loader from '../Loader';
 import CatalogList from '../CatalogList';
+import css from './LoadMore.module.css';
 
 export default function CatalogView() {
   const { filters, appliedFilters, changeFilter, search, clear } =
@@ -72,7 +73,7 @@ export default function CatalogView() {
                   type="button"
                   onClick={handleLoadMore}
                   disabled={isFetchingNextPage}
-                  className="border-gray-light hover:border-green-hover focus-visible:border-green-hover active:border-green-hover mx-auto mt-10 flex items-center justify-center rounded-full border px-8 py-4 transition-colors disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+                  className={css.button}
                 >
                   {isFetchingNextPage ? 'Loading...' : 'Load more'}
                 </button>

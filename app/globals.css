@@ -27,6 +27,7 @@
   --color-inputs: var(--inputs);
   --color-badges: var(--badges);
   --color-gray: var(--gray);
+  --color-gray-light: var(--gray-light);
   --color-rating: var(--rating);
   --color-grey-green: var(--grey-green);
   --color-green-hover: var(--green-hover);

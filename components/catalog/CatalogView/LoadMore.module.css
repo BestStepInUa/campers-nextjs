@@ -1,5 +1,6 @@
 .button {
-  display: inline-flex;
+  display: flex;
+  margin: 40px auto 0;
   padding: 16px 32px;
   border: 1px solid var(--gray-light);
   border-radius: 200px;
@@ -10,4 +11,10 @@
 .button:focus,
 .button:active {
   border-color: var(--green-hover);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }

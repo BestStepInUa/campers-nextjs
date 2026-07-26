@@ -71,3 +71,7 @@ export const fetchFilters = (): Promise<FiltersResponseDto> => {
     },
   });
 };
+
+export const fetchCamperById = (id: string): Promise<CamperListItemDto> => {
+  return api<CamperListItemDto>(`/campers/${id}`);
+};
