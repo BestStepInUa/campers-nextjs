@@ -19,12 +19,22 @@ interface FilterProps {
 }
 
 export default function Filter({ onFilter }: FilterProps) {
-  const { data: filterOptions } = useQuery({
+  const {
+    data: filterOptions,
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: ['filters'],
     queryFn: fetchFilters,
   });
 
-  console.log('filterOptions', filterOptions);
+  if (isPending) {
+    return <p>Loading filters...</p>;
+  }
+
+  if (isError) {
+    return <p>Error loading filters.</p>;
+  }
 
   const initialValues: FilterValues = {
     location: '',

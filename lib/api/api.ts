@@ -1,7 +1,6 @@
 import { createApi } from './createApi';
 
-const BACKEND_URL = `${process.env['NEXT_BACKEND_API_URL']}/api`;
-export const api = createApi(BACKEND_URL);
+export const api = createApi(process.env['NEXT_PUBLIC_BACKEND_API_URL']!);
 
 type formType = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
 type transmissionType = 'automatic' | 'manual';
