@@ -2,7 +2,7 @@
 
 import { Map } from 'lucide-react';
 
-type TextFilterFieldProps = {
+type Props = {
   id: string;
   label: string;
   placeholder: string;
@@ -16,7 +16,7 @@ export default function TextFilterField({
   placeholder,
   value,
   onChange,
-}: TextFilterFieldProps) {
+}: Props) {
   return (
     <div className="text-gray mb-10 flex flex-col gap-2">
       <label htmlFor={id}>{label}</label>

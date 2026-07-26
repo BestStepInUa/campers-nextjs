@@ -1,10 +1,8 @@
-import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 
 export default function Home() {
   return (
-    <div className="flex h-screen flex-col">
-      <Header />
+    <div className="flex overflow-y-hidden flex-col">
       <main className="flex-1">
         <Hero />
       </main>

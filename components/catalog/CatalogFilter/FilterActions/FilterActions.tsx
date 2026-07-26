@@ -2,11 +2,11 @@
 
 import { X } from 'lucide-react';
 
-type FilterActionsProps = {
+type Props = {
   onClear: () => void;
 };
 
-export default function FilterActions({ onClear }: FilterActionsProps) {
+export default function FilterActions({ onClear }: Props) {
   return (
     <>
       <button

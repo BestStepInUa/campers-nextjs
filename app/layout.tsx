@@ -3,6 +3,7 @@ import { Inter, Manrope, Geist } from 'next/font/google';
 import './globals.css';
 import TanStackProvider from '@/components/TanStackProvider';
 import { cn } from '@/lib/utils';
+import Header from '@/components/Header';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -50,6 +51,7 @@ export default function RootLayout({
     >
       <body>
         <TanStackProvider>
+          <Header />
           <main>{children}</main>
         </TanStackProvider>
       </body>

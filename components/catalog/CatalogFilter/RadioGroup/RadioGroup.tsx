@@ -2,7 +2,7 @@
 
 import type { FilterValues } from '@/types/catalog';
 
-type RadioGroupProps = {
+type Props = {
   title: string;
   name: keyof Pick<FilterValues, 'form' | 'engine' | 'transmission'>;
   options: string[];
@@ -23,7 +23,7 @@ export default function RadioGroup({
   options,
   value,
   onChange,
-}: RadioGroupProps) {
+}: Props) {
   return (
     <div className="mb-6">
       <p className="text-gray mb-2">{title}</p>

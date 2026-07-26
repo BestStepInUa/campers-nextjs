@@ -1,0 +1,13 @@
+.button {
+  display: inline-flex;
+  padding: 16px 32px;
+  border: 1px solid var(--gray-light);
+  border-radius: 200px;
+  transition: border-color var(--main-transition);
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  border-color: var(--green-hover);
+}
