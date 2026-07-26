@@ -22,9 +22,11 @@
 
 @theme {
   --color-main: var(--main);
+  --color-text: var(--text);
   --color-white: var(--white);
   --color-inputs: var(--inputs);
   --color-badges: var(--badges);
+  --color-gray: var(--gray);
   --color-grey-green: var(--grey-green);
   --color-green-hover: var(--green-hover);
 
@@ -36,6 +38,18 @@
     transition-duration: 333ms;
     transition-timing-function: ease-in-out;
   }
+}
+
+@utility scrollbar-hidden {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility clip-hidden {
+  clip-path: inset(100%);
 }
 
 html {

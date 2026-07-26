@@ -1,7 +1,5 @@
 'use client';
 
-import css from './CatalogView.module.css';
-
 import CatalogFilter from '../CatalogFilter';
 // import CatalogList from '../CatalogList';
 // import Loader from '../Loader';
@@ -53,8 +51,8 @@ export default function CatalogView() {
   });
 
   return (
-    <section className={css.section}>
-      <div className={`container ${css.wrapper}`}>
+    <section className="pt-12 pb-13">
+      <div className="mx-auto flex max-w-360 justify-between gap-16.25 px-16">
         <CatalogFilter
           filters={filters}
           filterOptions={filterOptions}
@@ -64,7 +62,7 @@ export default function CatalogView() {
           onClear={clear}
         />
 
-        <div className={css.content}>
+        <div>
           {/* {isLoading ? (
             <Loader />
           ) : campers.length === 0 ? (

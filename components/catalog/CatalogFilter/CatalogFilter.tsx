@@ -4,8 +4,6 @@ import { MapPin, X } from 'lucide-react';
 
 import type { CatalogFilterProps } from '@/types/catalog';
 
-import css from './CatalogFilter.module.css';
-
 function formatLabel(value: string) {
   return value
     .split('_')
@@ -22,105 +20,127 @@ export default function CatalogFilter({
   onClear,
 }: CatalogFilterProps) {
   if (isLoading) {
-    return <aside className={css.sidebar}>Loading filters...</aside>;
+    return (
+      <aside className="bg-inputs scrollbar-hidden sticky top-12 max-h-[calc(100vh-48px)] self-start overflow-y-auto rounded-[20px] px-6">
+        Loading filters...
+      </aside>
+    );
   }
 
   return (
-    <aside className={css.sidebar}>
+    <aside className="bg-inputs scrollbar-hidden sticky top-12 max-h-[calc(100vh-48px)] self-start overflow-y-auto rounded-[20px] px-6">
       <form
-        className={css.form}
         onSubmit={(e) => {
           e.preventDefault();
           onSearch();
         }}
       >
-        <div className={css.field}>
-          <label htmlFor="location" className={css.label}>
-            Location
-          </label>
+        <div className="text-gray mb-10 flex flex-col gap-2">
+          <label htmlFor="location">Location</label>
 
-          <div className={css.inputWrapper}>
+          <div className="group relative">
             <input
               id="location"
               type="text"
               value={filters.location}
               placeholder="City"
               onChange={(e) => onChange('location', e.target.value)}
-              className={css.input}
+              className="text-main w-full rounded-xl border-0 p-4 pr-5 pl-12 outline-none focus:outline-none focus:placeholder:text-transparent"
             />
 
-            <MapPin className={css.mapIcon} size={20} />
+            <MapPin
+              className="text-gray group-focus-within:text-main absolute top-4 left-5 transition-colors"
+              size={20}
+            />
           </div>
         </div>
 
-        <h3 className={css.title}>Filters</h3>
+        <h3 className="text-main mb-6 text-xl leading-6 font-semibold">
+          Filters
+        </h3>
 
-        <div className={css.group}>
-          <p className={css.groupTitle}>Camper form</p>
+        <div className="mb-6 last:mb-12">
+          <p className="text-gray mb-2">Camper form</p>
 
           {filterOptions?.forms.map((form) => (
-            <label key={form} className={css.radioLabel}>
+            <label
+              key={form}
+              className="text-main mb-2 flex cursor-pointer items-center gap-2 select-none"
+            >
               <input
                 type="radio"
                 name="form"
                 checked={filters.form === form}
                 onChange={() => onChange('form', form)}
-                className={css.radioInput}
+                className="clip-hidden sr-only absolute"
               />
 
-              <span className={css.customRadio} />
+              <span className="border-text after:bg-text flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-transform after:h-3.5 after:w-3.5 after:scale-0 after:rounded-full after:transition-transform after:content-[''] peer-checked:after:scale-100" />
 
               {formatLabel(form)}
             </label>
           ))}
         </div>
 
-        <div className={css.group}>
-          <p className={css.groupTitle}>Engine</p>
+        <div className="mb-6 last:mb-12">
+          <p className="text-gray mb-2">Engine</p>
 
           {filterOptions?.engines.map((engine) => (
-            <label key={engine} className={css.radioLabel}>
+            <label
+              key={engine}
+              className="text-main mb-2 flex cursor-pointer items-center gap-2 select-none"
+            >
               <input
                 type="radio"
                 name="engine"
                 checked={filters.engine === engine}
                 onChange={() => onChange('engine', engine)}
-                className={css.radioInput}
+                className="clip-hidden sr-only absolute"
               />
 
-              <span className={css.customRadio} />
+              <span className="border-text after:bg-text flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-transform after:h-3.5 after:w-3.5 after:scale-0 after:rounded-full after:transition-transform after:content-[''] peer-checked:after:scale-100" />
 
               {formatLabel(engine)}
             </label>
           ))}
         </div>
 
-        <div className={css.group}>
-          <p className={css.groupTitle}>Transmission</p>
+        <div className="mb-6 last:mb-12">
+          <p className="text-gray mb-2">Transmission</p>
 
           {filterOptions?.transmissions.map((transmission) => (
-            <label key={transmission} className={css.radioLabel}>
+            <label
+              key={transmission}
+              className="text-main mb-2 flex cursor-pointer items-center gap-2 select-none"
+            >
               <input
                 type="radio"
                 name="transmission"
                 checked={filters.transmission === transmission}
                 onChange={() => onChange('transmission', transmission)}
-                className={css.radioInput}
+                className="clip-hidden sr-only absolute"
               />
 
-              <span className={css.customRadio} />
+              <span className="border-text after:bg-text flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-transform after:h-3.5 after:w-3.5 after:scale-0 after:rounded-full after:transition-transform after:content-[''] peer-checked:after:scale-100" />
 
               {formatLabel(transmission)}
             </label>
           ))}
         </div>
 
-        <button type="submit" className={css.searchButton}>
+        <button
+          type="submit"
+          className="bg-grey-green hover:bg-green-hover focus:bg-green-hover active:bg-green-hover mb-4 flex w-full justify-center rounded-full px-0 py-4 tracking-[-0.01em] text-white transition-colors"
+        >
           Search
         </button>
 
-        <button type="button" onClick={onClear} className={css.clearButton}>
-          <X className={css.closeIcon} size={20} />
+        <button
+          type="button"
+          onClick={onClear}
+          className="border-gray-light hover:bg-green-hover focus:bg-green-hover active:bg-green-hover flex w-full items-center justify-center gap-1 rounded-full border bg-white py-4 transition-colors"
+        >
+          <X className="text-main" size={20} />
           Clear filters
         </button>
       </form>
