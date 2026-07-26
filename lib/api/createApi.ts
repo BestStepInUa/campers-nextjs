@@ -1,7 +1,10 @@
 import { FetchError } from './FetchError';
 
-type ApiOptions = RequestInit & {
-  params?: Record<string, string | number | boolean | undefined>;
+type Primitive = string | number | boolean;
+
+type ApiOptions = Omit<RequestInit, 'body'> & {
+  params?: Record<string, Primitive | undefined | null>;
+  body?: BodyInit | Record<string, unknown> | null;
 };
 
 export function createApi(baseUrl: string) {
@@ -9,7 +12,7 @@ export function createApi(baseUrl: string) {
 
   return async function api<T>(
     path: string,
-    { params, ...options }: ApiOptions = {}
+    { params, headers, body, ...options }: ApiOptions = {}
   ): Promise<T> {
     const url = new URL(`${API_URL}${path}`);
 
@@ -21,13 +24,28 @@ export function createApi(baseUrl: string) {
       });
     }
 
+    const requestHeaders = new Headers(headers);
+
+    let requestBody: BodyInit | undefined;
+
+    if (body != null) {
+      if (
+        body instanceof FormData ||
+        body instanceof URLSearchParams ||
+        body instanceof Blob ||
+        typeof body === 'string'
+      ) {
+        requestBody = body;
+      } else {
+        requestHeaders.set('Content-Type', 'application/json');
+        requestBody = JSON.stringify(body);
+      }
+    }
+
     const response = await fetch(url, {
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
       ...options,
+      headers: requestHeaders,
+      body: requestBody,
     });
 
     if (!response.ok) {
@@ -40,6 +58,10 @@ export function createApi(baseUrl: string) {
       }
 
       throw new FetchError(response.statusText, response.status, data);
+    }
+
+    if (response.status === 204) {
+      return undefined as T;
     }
 
     return response.json() as Promise<T>;

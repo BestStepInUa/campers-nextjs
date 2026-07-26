@@ -83,7 +83,7 @@ function RadioGroup({
               }`}
             >
               {isSelected ? (
-                <span className="bg-foreground size-2.5 rounded-full" />
+                <span className="size-2.5 rounded-full bg-red-500" />
               ) : null}
             </span>
             {label}
