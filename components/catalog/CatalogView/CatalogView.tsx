@@ -1,64 +1,93 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import css from './CatalogView.module.css';
 
 import CatalogFilter from '../CatalogFilter';
-import { type CamperListItemDto, fetchCampers } from '@/lib/api/api';
+// import CatalogList from '../CatalogList';
+// import Loader from '../Loader';
+// import NoCampersFound from '../NoCampersFound';
+
+import { useCatalogFilters } from '@/hooks/useCatalogFilters';
+import { useCampersQuery } from '@/hooks/useCampersQuery';
+import { useFiltersQuery } from '@/hooks/useFiltersQuery';
 
 export default function CatalogView() {
-  const [page, setPage] = useState<number>(1);
-  const [filterKey, setFilterKey] = useState<number>(0);
+  const { filters, appliedFilters, changeFilter, search, clear } =
+    useCatalogFilters();
 
-  const [filters, setFilters] = useState({
-    location: '',
-    form: '',
-    engine: '',
-    transmission: '',
+  const {
+    data: filterOptions,
+    isPending: isFiltersLoading,
+    isError: isFiltersError,
+  } = useFiltersQuery();
+
+  const {
+    campers,
+    hasMore,
+    isLoading,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useCampersQuery({
+    filters: appliedFilters,
   });
 
-  const [campers, setCampers] = useState<CamperListItemDto[]>([]);
+  const handleLoadMore = async () => {
+    await fetchNextPage();
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['campers', filters, page],
-    queryFn: () => fetchCampers({ ...filters, page, perPage: 4 }),
-    placeholderData: (previousData) => previousData,
-  });
-
-  console.log('campers', data);
-
-  // const totalCampers =
-  //   (data as { campers?: Camper[]; total?: number })?.total || 0;
-
-  useEffect(() => {
-    if (data) {
-      const newCampers =
-        (data as { campers?: CamperListItemDto[] })?.campers || [];
-      if (page === 1) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setCampers(newCampers);
-      } else {
-        setCampers((prev) => {
-          const existingIds = new Set(prev.map((c) => c.id));
-          const uniqueNewCampers = newCampers.filter(
-            (c) => !existingIds.has(c.id)
-          );
-          return [...prev, ...uniqueNewCampers];
-        });
-      }
-    }
-  }, [data, page]);
-
-  const handleApplyFilter = (newFilters: typeof filters) => {
-    setFilters(newFilters);
-    setPage(1);
+    window.scrollBy({
+      top: 300,
+      behavior: 'smooth',
+    });
   };
 
+  if (isFiltersError) {
+    return <p>Failed to load filters.</p>;
+  }
+
+  console.log({
+    isLoading,
+    isFetching,
+    isFetchingNextPage,
+    campers: campers.length,
+  });
+
   return (
-    <section className={css['section']}>
-      <div className={`container ${css['wrapper']}`}>
-        <CatalogFilter key={filterKey} onFilter={handleApplyFilter} />
+    <section className={css.section}>
+      <div className={`container ${css.wrapper}`}>
+        <CatalogFilter
+          filters={filters}
+          filterOptions={filterOptions}
+          isLoading={isFiltersLoading}
+          onChange={changeFilter}
+          onSearch={search}
+          onClear={clear}
+        />
+
+        <div className={css.content}>
+          {/* {isLoading ? (
+            <Loader />
+          ) : campers.length === 0 ? (
+            <NoCampersFound onClearFilters={clear} />
+          ) : (
+            <>
+              <CatalogList campers={campers} />
+
+              {hasMore && (
+                <button
+                  type="button"
+                  onClick={handleLoadMore}
+                  disabled={isFetchingNextPage}
+                  className={css.loadMoreButton}
+                >
+                  {isFetchingNextPage ? 'Loading...' : 'Load more'}
+                </button>
+              )}
+            </>
+          )} */}
+
+          {/* {isFetching && !isFetchingNextPage && <Loader />} */}
+        </div>
       </div>
     </section>
   );

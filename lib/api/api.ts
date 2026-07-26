@@ -1,6 +1,6 @@
 import { createApi } from './createApi';
 
-export const api = createApi(process.env['NEXT_PUBLIC_BACKEND_API_URL']!);
+export const api = createApi(process.env.NEXT_PUBLIC_BACKEND_API_URL!);
 
 type formType = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
 type transmissionType = 'automatic' | 'manual';
@@ -34,7 +34,7 @@ export interface CamperListResponseDto {
   campers: CamperListItemDto[];
 }
 
-interface CamperQueryParams {
+export interface CamperQueryParams {
   location?: string;
   form?: string;
   transmission?: string;
